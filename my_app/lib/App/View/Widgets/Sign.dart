@@ -20,7 +20,7 @@ class Sign extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -35,6 +35,7 @@ class Sign extends StatelessWidget {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
+                  fillColor: Colors.black,
                   labelText: 'Enter your Name',
                   border: OutlineInputBorder(),
                 ),
@@ -60,7 +61,7 @@ class Sign extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.green[800],
                 ),
                 child: Text(
                   'DONE',

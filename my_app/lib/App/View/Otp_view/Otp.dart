@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_app/App/View/Sign_view/Sign.dart';
+import 'package:my_app/App/View/Widgets/Sign.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Otp extends GetView {
@@ -8,18 +8,17 @@ class Otp extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: SafeArea(
               child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(top: 80),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage('lib/App/Assets/logo.jpg'),
+                    backgroundImage: AssetImage('lib/App/Assets/pngegg.png'),
                     maxRadius: 40,
                   ),
                   SizedBox(height: 10),
@@ -34,7 +33,7 @@ class Otp extends GetView {
                   ),
                   SizedBox(height: 0.5),
                   Text(
-                    'Login/Signup',
+                    'Enter your OTP Code',
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                   SizedBox(
@@ -85,7 +84,7 @@ class Otp extends GetView {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.all(1),
+                    padding: const EdgeInsets.only(bottom: 8),
                     child: InkWell(
                       onTap: () {
                         Get.bottomSheet(Container(
@@ -110,7 +109,7 @@ class Otp extends GetView {
                             'CONTINUE',
                             style: TextStyle(
                                 fontSize: 22,
-                                color: const Color.fromARGB(255, 61, 61, 61),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -119,17 +118,17 @@ class Otp extends GetView {
                   ),
                   Text(
                     'By continuing, I hereby confirm that I am 18 years of age or',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
                   ),
                   Container(
-                    width: 400,
+                    width: Get.width * .9,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           'above and I agree to the',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
+                          style: TextStyle(fontSize: 10, color: Colors.grey),
                         ),
                         InkWell(
                           onTap: () {},
@@ -144,7 +143,7 @@ class Otp extends GetView {
                         ),
                         Text(
                           'and',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
+                          style: TextStyle(fontSize: 10, color: Colors.grey),
                         ),
                         InkWell(
                           onTap: () {},
@@ -160,32 +159,32 @@ class Otp extends GetView {
                       ],
                     ),
                   ),
-                  SizedBox(height: 170),
+                  // SizedBox(height: 170),
 
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        width: 30,
-                        height: 30,
-                        child: Image.asset('lib/App/Assets/messenger.png')),
-                  ),
-
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                      'Need help?',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        ' Contact Us',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      ),
-                    )
-                  ])
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Container(
+                  //       width: 30,
+                  //       height: 30,
+                  //       child: Image.asset('lib/App/Assets/messenger.png')),
+                  // ),
+                  //
+                  // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  //   Text(
+                  //     'Need help?',
+                  //     style: TextStyle(color: Colors.white),
+                  //   ),
+                  //   InkWell(
+                  //     onTap: () {},
+                  //     child: Text(
+                  //       ' Contact Us',
+                  //       style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 17,
+                  //           color: Colors.white),
+                  //     ),
+                  //   )
+                  // ])
                 ],
               ),
             ),

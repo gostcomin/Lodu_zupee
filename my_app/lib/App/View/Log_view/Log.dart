@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Log extends GetView {
+class Login extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 80),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('lib/App/Assets/logo.jpg'),
+                  backgroundImage: AssetImage('lib/App/Assets/pngegg.png'),
                   maxRadius: 40,
                 ),
                 SizedBox(height: 10),
@@ -23,12 +24,12 @@ class Log extends GetView {
                 // Title Text
                 Text(
                   'Get Started',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(height: 0.5),
                 Text(
                   'Login/Signup',
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
                 SizedBox(
                   height: 35,
@@ -54,7 +55,7 @@ class Log extends GetView {
                           width: 30,
                           height: 20,
                           child: Image.asset(
-                            'lib/App/Assets/bangladesh.png',
+                            'lib/App/Assets/bdflag.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -64,13 +65,14 @@ class Log extends GetView {
                         padding: const EdgeInsets.all(3),
                         child: Text(
                           '+88',
-                          style: TextStyle(fontSize: 17),
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                         ),
                       ),
                       // Phone number input field
                       Expanded(
                         child: TextField(
                           keyboardType: TextInputType.phone,
+                          textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             hintText: 'Enter your phone number',
                             border: InputBorder.none,
@@ -82,7 +84,7 @@ class Log extends GetView {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(top: 15, bottom: 8),
                   child: InkWell(
                     onTap: () {
                       Get.toNamed('/otp');
@@ -102,8 +104,10 @@ class Log extends GetView {
                           'CONTINUE',
                           style: TextStyle(
                               fontSize: 22,
-                              color: const Color.fromARGB(255, 61, 61, 61),
-                              fontWeight: FontWeight.bold),
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Roboto'
+                          ),
                         ),
                       ),
                     ),
@@ -111,17 +115,17 @@ class Log extends GetView {
                 ),
                 Text(
                   'By continuing, I hereby confirm that I am 18 years of age or',
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(fontSize: 10, color: Colors.grey),
                 ),
                 Container(
-                  width: 400,
+                  width: Get.width * .9,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         'above and I agree to the',
-                        style: TextStyle(fontSize: 10),
+                        style: TextStyle(fontSize: 10, color: Colors.grey),
                       ),
                       InkWell(
                         onTap: () {},
@@ -136,7 +140,7 @@ class Log extends GetView {
                       ),
                       Text(
                         'and',
-                        style: TextStyle(fontSize: 10),
+                        style: TextStyle(fontSize: 10, color: Colors.grey),
                       ),
                       InkWell(
                         onTap: () {},
@@ -155,20 +159,20 @@ class Log extends GetView {
                 SizedBox(height: 170),
 
                 Container(
-                    width: 30,
-                    height: 30,
+                    width: Get.width * .1,
+                    height: Get.height * .05,
                     child: Image.asset('lib/App/Assets/messenger.png')),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Need help?'),
+                    Text('Need help?', style: TextStyle(color: Colors.white),),
                     InkWell(
                       onTap: () {},
                       child: Text(
                         ' Contact Us',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
+                            fontWeight: FontWeight.bold, fontSize: 17, color: const Color.fromARGB(255, 8, 243, 243)),
                       ),
                     )
                   ],
@@ -176,11 +180,11 @@ class Log extends GetView {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('agsd?'),
+                    Text('প্রবাসী?', style: TextStyle(color: Colors.white)),
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        ' click',
+                        ' Click here',
                         style: TextStyle(
                             color: const Color.fromARGB(255, 8, 243, 243),
                             fontWeight: FontWeight.bold,

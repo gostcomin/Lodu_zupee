@@ -8,17 +8,16 @@ class Splash extends GetView {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () {
-      Get.toNamed('/log');
+      Get.toNamed('/login');
     });
     return const Scaffold(
-      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('lib/App/Assets/logo.jpg'),
+              backgroundImage: AssetImage('lib/App/Assets/pngegg.png'),
               maxRadius: 45,
             ),
             SizedBox(
@@ -34,7 +33,7 @@ class Splash extends GetView {
             Center(
               child: SpinKitFadingCircle(
                 color: Colors.white,
-                size: 70.0,
+                size: 50.0,
               ),
             ),
           ],
