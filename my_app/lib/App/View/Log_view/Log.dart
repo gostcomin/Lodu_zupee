@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Login extends GetView {
+import '../../Controllers/LoginController.dart';
+
+class Login extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +73,9 @@ class Login extends GetView {
                       // Phone number input field
                       Expanded(
                         child: TextField(
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                           keyboardType: TextInputType.phone,
+                          textAlignVertical: TextAlignVertical.top,
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             hintText: 'Enter your phone number',
@@ -86,8 +90,8 @@ class Login extends GetView {
                 Padding(
                   padding: EdgeInsets.only(top: 15, bottom: 8),
                   child: InkWell(
-                    onTap: () {
-                      Get.toNamed('/otp');
+                    onTap: () async {
+                      await controller.logphone();
                     },
                     child: Container(
                       width: 300,

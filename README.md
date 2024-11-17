@@ -1,2 +1,3 @@
 # Lodu_zupee
-Aplication Devolopment
+API URL : https://ludobast.com/API/
+README : https://ludobast.com/API/readme

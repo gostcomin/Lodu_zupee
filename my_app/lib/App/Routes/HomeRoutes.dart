@@ -5,9 +5,11 @@ import 'package:my_app/App/View/Log_view/Log.dart';
 import 'package:my_app/App/View/Otp_view/Otp.dart';
 import 'package:my_app/App/View/Splash_view/Splash.dart';
 
+import '../Binding/ControllerBinding.dart';
+
 class AppRoutes {
   // Initial route
-  static const initialRoute = '/leaderboard';
+  static const initialRoute = '/Splash';
 
   // Named routes
   static const splash = '/Splash';
@@ -19,8 +21,8 @@ class AppRoutes {
   // GetPages for routing
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
-    GetPage(name: login, page: () => Login()),
-    GetPage(name: otp, page: () => Otp()),
+    GetPage(name: login, page: () => Login(), binding: AllBindings()),
+    GetPage(name: otp, page: () => Otp(), binding: OtpBinding()),
     GetPage(name: home, page: () => Home()),
     GetPage(name: leaderboard, page: () => Leaderboard()),
   ];

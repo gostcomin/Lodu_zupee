@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_app/App/View/Widgets/Sign.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Otp extends GetView {
@@ -86,13 +85,8 @@ class Otp extends GetView {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: InkWell(
-                      onTap: () {
-                        Get.bottomSheet(Container(
-                          color: Colors.white,
-                          width: 400,
-                          height: 800,
-                          child: Sign(),
-                        ));
+                      onTap: () async {
+                        await controller.verifyOtp();
                       },
                       child: Container(
                         width: 300,
