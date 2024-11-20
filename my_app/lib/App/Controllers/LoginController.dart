@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,6 +6,9 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io';
 import 'package:my_app/App/Service/OtpAuthService.dart';
 import 'package:my_app/App/View/Widgets/DoPopup.dart';
+import 'package:my_app/App/View/Widgets/UserBannedDialog.dart';
+
+import '../Config/AppData.dart';
 
 class LoginController extends GetxController {
   var phoneController = TextEditingController();
@@ -20,6 +22,7 @@ class LoginController extends GetxController {
 
     });
   }
+
 
   Future<String?> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -38,9 +41,10 @@ class LoginController extends GetxController {
 
   Future<void> logphone() async {
     try {
+
       var header = {"Content-Type": "application/json"};
-      var url = Uri.parse('https://ludobast.com/API/send_login_otp.php');
-      String phone = this.phone.value;
+      var url = Uri.parse('${AppConfig.apiUrl}send_login_otp.php');
+      String? phone = this.phone.value;
       String? deviceId = await getDeviceId();
 
       if (!RegExp(r'^\d{11}$').hasMatch(phone.trim())) {
@@ -64,12 +68,15 @@ class LoginController extends GetxController {
         if (responseData['status'] == true) {
           Get.find<OtpAuthService>().setAuthData(responseData);
           Get.toNamed('/otp');
+        } else if (responseData['account_status'] == 'false'){
+          Get.dialog(
+            UserBannedDialog(),
+          );
         } else {
           Get.dialog(
             DoPopup(message: responseData['message']),
           );
         }
-
       } else {
         Get.dialog(
           DoPopup(message: "Failed to send OTP. Please try again."),

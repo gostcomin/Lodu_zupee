@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Sign extends StatelessWidget {
+import '../../Controllers/RegisterController.dart';
+
+
+
+class Sign extends GetView<SignController> {
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => SignController());
     return SingleChildScrollView(
       padding: EdgeInsets.only(
         bottom:
@@ -14,6 +19,7 @@ class Sign extends StatelessWidget {
           color: Colors.white,
           padding: EdgeInsets.all(20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
@@ -34,6 +40,7 @@ class Sign extends StatelessWidget {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: controller.nameController,
                 decoration: InputDecoration(
                   fillColor: Colors.black,
                   labelText: 'Enter your Name',
@@ -42,6 +49,7 @@ class Sign extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: controller.emailController,
                 decoration: InputDecoration(
                   labelText: 'Enter your E-mail address',
                   border: OutlineInputBorder(),
@@ -49,6 +57,7 @@ class Sign extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: controller.refercodeController,
                 decoration: InputDecoration(
                   labelText: 'Promo Code (Optional)',
                   border: OutlineInputBorder(),
@@ -57,7 +66,7 @@ class Sign extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Get.toNamed('/home'); // Close bottom sheet
+                  controller.registerUser(); // Close bottom sheet
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),

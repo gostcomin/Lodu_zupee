@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_app/App/Controllers/WidgetController/CallVersionController.dart';
 import '../Controllers/LoginController.dart';
 import '../Controllers/OtpController.dart';
 import '../Controllers/RegisterController.dart';
@@ -17,9 +18,16 @@ class OtpBinding extends Bindings {
   }
 }
 
-class SingBinding extends Bindings {
+class RegisterBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SignController>(() => SignController());
+  }
+}
+
+class CallVersionBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<AppVersionController>(() => AppVersionController());
   }
 }

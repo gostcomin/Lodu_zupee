@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/App/Config/AppData.dart';
 import 'package:my_app/App/Routes/HomeRoutes.dart';
 import 'package:flutter/services.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         InitialBinding().dependencies();
       }),
-      title: 'Zupee',
+      title: AppConfig.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

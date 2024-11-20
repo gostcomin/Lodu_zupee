@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/App/Config/AppData.dart';
 import 'dart:convert';
 import 'package:my_app/App/Service/OtpAuthService.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../Service/UserAuthService.dart';
+import '../View/Widgets/DoPopup.dart';
 import '../View/Widgets/Sign.dart';
 
 class OtpController extends GetxController {
@@ -23,19 +24,24 @@ class OtpController extends GetxController {
 
   Future<void> verifyOtp() async {
     try {
-      var url = Uri.parse('https://ludobast.com/API/validate_and_login.php');
+      var url = Uri.parse('${AppConfig.apiUrl}validate_and_login.php');
       String otp = this.otp.value;
       final authService = Get.find<OtpAuthService>();
 
-      if (otp.isEmpty) {
-        throw Exception('OTP cannot be empty');
+      if (otp.isEmpty || !RegExp(r'^\d{6}$').hasMatch(otp.trim())) {
+        Get.dialog(
+          DoPopup(message: "Enter valid OTP Code"),
+        );
+        return;
       }
 
       String? token = authService.token.value;
 
       // Ensure the token exists
-      if (token == Null || token.isEmpty) {
-        print("Token not found");
+      if (token.isEmpty) {
+        Get.dialog(
+          DoPopup(message: "We are unable to authenticate you, Please try again later."),
+        );
         return;
       }
 
@@ -79,9 +85,9 @@ class OtpController extends GetxController {
             Get.toNamed('/home');
           }
         } else {
-          print(responseData.toString());
-          Get.snackbar('Error', responseData['message'],
-              backgroundColor: Colors.yellow);
+          Get.dialog(
+            DoPopup(message: responseData['message']),
+          );
         }
       } else {
         Get.snackbar('Error', 'Failed to verify OTP. Please try again.',
@@ -89,7 +95,7 @@ class OtpController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e',
-          backgroundColor: Colors.yellow, duration: Duration(minutes: 5));
+          backgroundColor: Colors.yellow, duration: const Duration(minutes: 5));
     }
   }
 

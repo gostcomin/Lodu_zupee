@@ -1,12 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:my_app/App/Config/AppData.dart';
+import 'package:my_app/App/Controllers/WidgetController/UrlLauncher.dart';
 
 import '../../Controllers/LoginController.dart';
 
 class Login extends GetView<LoginController> {
+  final storage = GetStorage();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false, // Prevent default back navigation
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop) {
+          // Show a confirmation dialog
+          bool shouldExit = await Get.dialog<bool>(
+            AlertDialog(
+              title: Text("Exit App"),
+              content: Text("Are you sure you want to close the app?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Get.back(result: false), // Cancel
+                  child: Text("Cancel"),
+                ),
+                TextButton(
+                  onPressed: () => Get.back(result: true), // Confirm exit
+                  child: Text("Exit"),
+                ),
+              ],
+            ),
+          ) ??
+              false; // Default to false if dialog is dismissed
+
+          if (shouldExit) {
+            SystemNavigator.pop(); // Close the app
+          }
+        } // Prevent further bubbling
+      },
+      child: Scaffold(
 
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -18,7 +51,7 @@ class Login extends GetView<LoginController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('lib/App/Assets/pngegg.png'),
+                  backgroundImage: AssetImage(AppConfig.logoPath),
                   maxRadius: 40,
                 ),
                 SizedBox(height: 10),
@@ -73,6 +106,7 @@ class Login extends GetView<LoginController> {
                       // Phone number input field
                       Expanded(
                         child: TextField(
+                          controller: controller.phoneController,
                           style: TextStyle(fontSize: 17, color: Colors.white),
                           keyboardType: TextInputType.phone,
                           textAlignVertical: TextAlignVertical.top,
@@ -172,7 +206,14 @@ class Login extends GetView<LoginController> {
                   children: [
                     Text('Need help?', style: TextStyle(color: Colors.white),),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        String? supportUrl = storage.read('support_url') ?? '';
+                        if (supportUrl.isNotEmpty) {
+                          UrlLauncher.launch(supportUrl);
+                        } else {
+                          Get.snackbar('Error', 'No support URL found');
+                        }
+                      },
                       child: Text(
                         ' Contact Us',
                         style: TextStyle(
@@ -186,7 +227,14 @@ class Login extends GetView<LoginController> {
                   children: [
                     Text('প্রবাসী?', style: TextStyle(color: Colors.white)),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        String? supportUrl = storage.read('support_url') ?? '';
+                        if (supportUrl.isNotEmpty) {
+                          UrlLauncher.launch(supportUrl);
+                        } else {
+                          Get.snackbar('Error', 'No support URL found');
+                        }
+                      },
                       child: Text(
                         ' Click here',
                         style: TextStyle(
@@ -202,6 +250,7 @@ class Login extends GetView<LoginController> {
           ),
         ),
       ),
+    ),
     );
   }
 }

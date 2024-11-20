@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_storage/get_storage.dart';
-
-
+import '../Config/AppData.dart';
 import '../Service/UserAuthService.dart';
+import '../View/Widgets/DoPopup.dart';
 
 class SignController extends GetxController {
   final nameController = TextEditingController();
@@ -46,7 +45,7 @@ class SignController extends GetxController {
 
   Future<void> registerUser() async {
     try {
-      final url = Uri.parse('https://ludobast.com/API/register.php');
+      final url = Uri.parse('${AppConfig.apiUrl}register.php');
       final deviceId = await getDeviceId();
 
       // Validation checks
@@ -64,7 +63,7 @@ class SignController extends GetxController {
       final body = {
         'full_name': name.value,
         'email': email.value,
-        'refercode': refercode.value.isEmpty ? 'null' : refercode.value,
+        'promocode': refercode.value.isEmpty ? 'null' : refercode.value,
         'country': 'BD',
         'device_id': deviceId ?? 'unknown_device',
         'password': null,
@@ -86,9 +85,9 @@ class SignController extends GetxController {
           }
           Get.toNamed('/home');
         } else {
-          Get.snackbar('Error',
-              responseData['message'] ?? 'Failed to register. Try again.',
-              backgroundColor: Colors.yellow);
+          Get.dialog(
+            DoPopup(message: responseData['message'] ),
+          );
         }
       } else {
         Get.snackbar('Error', 'Failed to register. Server error.');
